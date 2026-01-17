@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Products | Helios Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+
+<body class="flex bg-gray-100 min-h-screen text-gray-800">
+
+  <!-- SIDEBAR -->
+  <aside class="w-64 bg-[#0f172a] text-white flex flex-col justify-between shadow-xl">
+    <div>
+      <h1 class="text-2xl font-bold text-white mb-8 text-center pt-6">HELIOS Admin</h1>
+      <nav class="px-4 space-y-2">
+        <a href="/admin"
+           class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">
+           Dashboard
+        </a>
+        <a href="/admin/manage-products"
+           class="block py-2 px-3 bg-blue-600 rounded-lg font-semibold">
+           Products
+        </a>
+        <a href="/admin/add-product"
+           class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">
+           Add Product
+        </a>
+        <a href="/admin/users"
+           class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">
+           Users
+        </a>
+      </nav>
+    </div>
+
+    <div class="p-4 text-center border-t border-blue-800/30">
+      <a href="/" class="text-sm text-blue-400 hover:text-blue-300 transition">← Back to Store</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="flex-1 p-8 bg-white overflow-y-auto">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Manage Products</h1>
+      <a href="/admin/add-product"
+         class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium shadow-md transition">
+         + Add Product
+      </a>
+    </div>
+
+    <!-- Product Table -->
+    <div class="bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200">
+      <table class="w-full text-sm text-left text-gray-600">
+        <thead class="bg-blue-50 text-blue-700 uppercase text-xs tracking-wider border-b">
+          <tr>
+            <th class="px-6 py-3">Image</th>
+            <th class="px-6 py-3">Name</th>
+            <th class="px-6 py-3">Price</th>
+            <th class="px-6 py-3 text-center">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(product => { %>
+            <tr class="hover:bg-gray-50 transition border-b">
+              <td class="px-6 py-3">
+                <img src="<%= product.image %>" alt="<%= product.name %>"
+                     class="h-14 w-14 rounded-md object-cover shadow-sm border border-gray-200">
+              </td>
+              <td class="px-6 py-3 font-semibold text-gray-800"><%= product.name %></td>
+              <td class="px-6 py-3 font-medium text-blue-600">₹<%= product.price.toLocaleString() %></td>
+              <td class="px-6 py-3 text-center">
+                <a href="/admin/products/edit/<%= product._id %>"
+                   class="inline-block px-3 py-1 bg-blue-500 text-white text-xs rounded-md hover:bg-blue-600 transition">
+                   Edit
+                </a>
+                <a href="/admin/delete-product/<%= product._id %>"
+                   onclick="return confirm('Are you sure you want to delete this product?')"
+                   class="inline-block px-3 py-1 bg-red-500 text-white text-xs rounded-md hover:bg-red-600 transition">
+                   Delete
+                </a>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= product.name %> | Helios</title>
+
+  <link rel="stylesheet" href="/css/productDetails.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-[#fafafa] text-gray-800 font-[Poppins]">
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+  <!-- Add spacing below navbar -->
+  <div class="h-24"></div>
+
+  <!-- Product Section -->
+  <section class="product-section max-w-7xl mx-auto px-6 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    
+    <!-- LEFT: Product Image Gallery -->
+    <div class="flex flex-col items-center space-y-6">
+      <div class="main-image bg-white rounded-2xl shadow-md overflow-hidden p-6">
+        <img 
+          src="<%= product.image %>" 
+          alt="<%= product.name %>" 
+          class="w-full h-auto object-contain rounded-xl transition-transform duration-500 hover:scale-105" 
+        />
+      </div>
+
+      <!-- Thumbnails -->
+      <div class="flex space-x-4">
+        <img src="<%= product.image %>" class="thumb active-thumb" alt="thumb">
+      </div>
+    </div>
+
+    <!-- RIGHT: Product Info -->
+    <div class="flex flex-col space-y-6">
+      <p class="uppercase text-yellow-600 font-semibold tracking-wide">Helios Collection</p>
+      <h1 class="text-4xl font-extrabold text-gray-900"><%= product.name %></h1>
+      <p class="text-gray-600 leading-relaxed">
+        <%= product.description %> <br>
+        Crafted for those who appreciate timeless design, precision engineering, and bold presence.
+      </p>
+
+      <!-- Price Section -->
+      <div class="flex items-center space-x-4">
+        <span class="text-4xl font-bold text-blue-700">₹<%= product.price.toLocaleString() %></span>
+        <span class="text-gray-400 line-through text-lg">₹<%= (product.price * 1.5).toFixed(0) %></span>
+        <span class="text-white bg-orange-500 px-2 py-1 rounded text-sm font-semibold">33% OFF</span>
+      </div>
+
+      <!-- Product Details -->
+      <div class="text-sm mt-4 space-y-1">
+        <p><strong>Brand:</strong> <%= product.brand || "Helios" %></p>
+        <p><strong>Warranty:</strong> 2 Years International</p>
+        <p><strong>Material:</strong> Stainless Steel Body</p>
+        <p><strong>Water Resistance:</strong> 100 meters</p>
+        <p><strong>Availability:</strong> <span class="text-green-600 font-semibold">In Stock</span></p>
+      </div>
+
+      <!-- Quantity and Buttons -->
+      <div class="flex items-center space-x-4 pt-4">
+        <div class="flex items-center bg-gray-100 rounded-lg border px-3 py-2">
+          <button class="text-xl px-2 hover:text-blue-600">−</button>
+          <input type="number" value="1" min="1" class="w-12 text-center bg-transparent outline-none font-semibold">
+          <button class="text-xl px-2 hover:text-blue-600">+</button>
+        </div>
+
+        <a href="/cart/add/<%= product._id %>"
+           class="flex-1 text-center bg-yellow-400 hover:bg-yellow-500 text-black py-3 rounded-lg font-semibold transition-all duration-300 shadow-md">
+          🛒 Add to Cart
+        </a>
+      </div>
+
+      <!-- Buy Now Button -->
+      <<button onclick="payNow(<%= product.price %>)"
+        class="bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-semibold shadow-md transition-all duration-300">
+        💳 Buy Now
+      </button>
+    </div>
+  </section>
+
+  <!-- Razorpay Payment -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script>
+    async function payNow(amount) {
+      const res = await fetch("/payment/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount }),
+      });
+
+      const data = await res.json();
+      if (!data.success) return alert("Payment failed");
+
+      const options = {
+        key: "<%= process.env.RAZORPAY_KEY_ID %>",
+        amount: data.order.amount,
+        currency: "INR",
+        name: "Helios WatchStore",
+        description: "Watch Purchase",
+        order_id: data.order.id,
+        handler: function (response) {
+          alert("✅ Payment Successful!");
+          window.location.href = "/";
+        },
+        theme: { color: "#1E40AF" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+</body>
+</html>

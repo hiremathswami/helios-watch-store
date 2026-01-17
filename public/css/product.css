@@ -1,0 +1,256 @@
+/* ==== GLOBAL RESET ==== */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #f5f7fb;
+  color: #111;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==== PAGE LAYOUT ==== */
+.watches-page {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 60px;
+}
+
+/* ==== FILTER SIDEBAR ==== */
+.filters {
+  width: 250px;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.filters h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e3a8a;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+/* Filter Category Dropdown */
+.filters details {
+  margin-bottom: 18px;
+  border-bottom: 1px solid #e6e8f0;
+  padding-bottom: 8px;
+}
+
+.filters summary {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #222;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.filters summary::after {
+  content: '▾';
+  position: absolute;
+  right: 0;
+  font-size: 0.9rem;
+  transition: transform 0.3s ease;
+  color: #555;
+}
+
+.filters details[open] summary::after {
+  transform: rotate(-180deg);
+  color: #1e3a8a;
+}
+
+/* Filter Group */
+.filter-group {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-group label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 6px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.filter-group label:hover {
+  color: #1e3a8a;
+}
+
+.filters input[type="radio"] {
+  accent-color: #1e3a8a;
+  transform: scale(1.1);
+}
+
+/* Apply Filters Button */
+.apply-btn {
+  width: 100%;
+  background: #1e3a8a;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 10px 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.apply-btn:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+/* ==== PRODUCT SECTION ==== */
+.product-section {
+  flex: 1;
+}
+
+.top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
+.top-bar h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+}
+
+.sort-select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.9rem;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.sort-select:hover,
+.sort-select:focus {
+  border-color: #1e3a8a;
+}
+
+/* ==== PRODUCT GRID ==== */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 28px;
+  justify-items: center;
+}
+
+/* ==== PRODUCT CARD ==== */
+.product-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  width: 250px;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.product-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+  background-color: #f8f9fc;
+  border-bottom: 1px solid #e6e8f0;
+}
+
+.info {
+  padding: 14px 10px;
+}
+
+.product-name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.product-meta {
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 1.1rem;
+  color: #1e3a8a;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.view-btn,
+.cart-btn {
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.view-btn {
+  background: #2563eb;
+  color: #fff;
+}
+
+.view-btn:hover {
+  background: #1e40af;
+}
+
+.cart-btn {
+  background: #111;
+  color: #fff;
+}
+
+.cart-btn:hover {
+  background: #333;
+}
+
+/* ==== RESPONSIVE DESIGN ==== */
+@media (max-width: 1024px) {
+  .watches-page {
+    flex-direction: column;
+    padding: 30px 20px;
+  }
+
+  .filters {
+    width: 100%;
+    position: relative;
+    top: 0;
+    margin-bottom: 30px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+  }
+}

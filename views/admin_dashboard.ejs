@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard | WatchStore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="bg-gray-100 flex min-h-screen font-[Poppins]">
+
+  <!-- ===== SIDEBAR ===== -->
+  <aside class="bg-[#111827] w-64 text-gray-200 p-5 flex flex-col justify-between">
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-8 tracking-wide">Admin Panel</h2>
+
+      <nav class="space-y-3">
+        <a href="/admin/dashboard" class="flex items-center gap-3 p-2 rounded-lg bg-[#1f2937] text-white font-medium">
+          <i class="fas fa-home"></i> Dashboard
+        </a>
+        <a href="/admin/products" class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#1f2937] transition">
+          <i class="fas fa-box"></i> Products
+        </a>
+        <a href="/admin/orders" class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#1f2937] transition">
+          <i class="fas fa-shopping-cart"></i> Orders
+        </a>
+        <a href="/admin/users" class="flex items-center gap-3 p-2 rounded-lg hover:bg-[#1f2937] transition">
+          <i class="fas fa-users"></i> Users
+        </a>
+      </nav>
+    </div>
+
+    <a href="/logout" class="flex items-center gap-3 text-red-400 hover:text-red-500 mt-10">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </a>
+  </aside>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="flex-1 p-8 overflow-y-auto">
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
+      <input type="text" placeholder="Search..." class="border rounded-lg px-4 py-2 w-64 outline-none focus:ring-2 focus:ring-blue-500" />
+    </div>
+
+    <!-- ===== STATS CARDS ===== -->
+    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
+      <div class="bg-white shadow-lg rounded-2xl p-5 border-l-4 border-blue-600">
+        <h3 class="text-gray-500 text-sm">Total Revenue</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-2">₹920,035</p>
+        <p class="text-green-500 text-sm mt-1">+15% this month</p>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-2xl p-5 border-l-4 border-yellow-500">
+        <h3 class="text-gray-500 text-sm">Orders</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-2">320</p>
+        <p class="text-green-500 text-sm mt-1">+8% this month</p>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-2xl p-5 border-l-4 border-purple-600">
+        <h3 class="text-gray-500 text-sm">Active Users</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-2">1,235</p>
+        <p class="text-red-500 text-sm mt-1">-3% this month</p>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-2xl p-5 border-l-4 border-teal-500">
+        <h3 class="text-gray-500 text-sm">Products</h3>
+        <p class="text-2xl font-bold text-gray-800 mt-2">58</p>
+        <p class="text-green-500 text-sm mt-1">+2 new added</p>
+      </div>
+    </div>
+
+    <!-- ===== CHARTS + TODO ===== -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <!-- CHART CARD -->
+      <div class="col-span-2 bg-white rounded-2xl shadow-lg p-6">
+        <h3 class="font-semibold text-lg mb-4 text-gray-700">Monthly Sales Overview</h3>
+        <canvas id="salesChart" height="120"></canvas>
+      </div>
+
+      <!-- TODO LIST -->
+      <div class="bg-white rounded-2xl shadow-lg p-6">
+        <h3 class="font-semibold text-lg mb-4 text-gray-700">Admin Tasks</h3>
+        <ul class="space-y-3">
+          <li class="flex justify-between items-center border-b pb-2">
+            <span>Update Product List</span>
+            <input type="checkbox" />
+          </li>
+          <li class="flex justify-between items-center border-b pb-2">
+            <span>Review Pending Orders</span>
+            <input type="checkbox" checked />
+          </li>
+          <li class="flex justify-between items-center border-b pb-2">
+            <span>Check Payment Gateway</span>
+            <input type="checkbox" />
+          </li>
+          <li class="flex justify-between items-center">
+            <span>Reply to User Emails</span>
+            <input type="checkbox" />
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="text-center text-gray-500 mt-10 text-sm">
+      © 2025 WatchStore Admin Panel — Built with ❤️
+    </footer>
+  </main>
+
+  <script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+          label: 'Sales (₹)',
+          data: [12000, 15000, 11000, 18000, 22000, 26000, 30000],
+          backgroundColor: ['#2563eb', '#2563eb', '#2563eb', '#2563eb', '#2563eb', '#2563eb', '#2563eb'],
+          borderRadius: 8,
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

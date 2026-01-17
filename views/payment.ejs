@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Checkout | WatchStore</title>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+  <div class="bg-gray-800 p-8 rounded-xl shadow-xl text-center">
+    <h1 class="text-3xl mb-4 font-bold text-yellow-400">Complete Your Payment</h1>
+    <p class="mb-6 text-gray-300">Click below to proceed securely with Razorpay.</p>
+    <button id="payBtn" class="bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+      Pay Now
+    </button>
+  </div>
+
+  <script>
+    document.getElementById("payBtn").onclick = async function () {
+      const amount = 500; // Example ₹500
+      const response = await fetch("/payment/create-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ amount })
+      });
+      const data = await response.json();
+
+      const options = {
+        key: "<%= process.env.RAZORPAY_KEY_ID %>",
+        amount: data.amount,
+        currency: data.currency,
+        name: "WatchStore",
+        description: "Premium Watch Purchase",
+        order_id: data.orderId,
+        handler: function (response) {
+          alert("Payment Successful! 🥳 Payment ID: " + response.razorpay_payment_id);
+          window.location.href = "/cart"; // redirect after success
+        },
+        theme: { color: "#FBBF24" }
+      };
+
+      const rzp = new Razorpay(options);
+      rzp.open();
+    };
+  </script>
+</body>
+</html>

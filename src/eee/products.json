@@ -1,0 +1,119 @@
+[
+  {
+    "id": "movado-bold-3600898",
+    "brand": "MOVADO",
+    "model": "Bold Men",
+    "name": "MOVADO Bold Men",
+    "sku": "3600898",
+    "price": 74625,
+    "currency": "INR",
+    "availability": "In Stock",
+    "images": [
+      "assets/img/featured1.png",
+      "assets/img/product1.png",
+      "assets/img/new1.png"
+    ],
+    "description": "A contemporary design with a minimalist dial and precision quartz movement.",
+    "features": [
+      "Quartz movement",
+      "Water resistant 3 ATM",
+      "Mineral crystal",
+      "Stainless steel case"
+    ],
+    "specs": {
+      "Case Diameter": "42 mm",
+      "Case Material": "Stainless Steel",
+      "Band Material": "Leather",
+      "Movement": "Quartz",
+      "Water Resistance": "30 m"
+    }
+  },
+  {
+    "id": "hamilton-jazzmaster",
+    "brand": "Hamilton",
+    "model": "Jazzmaster",
+    "name": "Hamilton Jazzmaster",
+    "sku": "H32515555",
+    "price": 105000,
+    "currency": "INR",
+    "availability": "In Stock",
+    "images": [
+      "assets/img/featured1.png",
+      "assets/img/product3.png",
+      "assets/img/new2.png"
+    ],
+    "description": "Classic elegance with Swiss precision and sapphire crystal for everyday wear.",
+    "features": [
+      "Automatic movement",
+      "Sapphire crystal",
+      "Date display",
+      "Stainless steel bracelet"
+    ],
+    "specs": {
+      "Case Diameter": "40 mm",
+      "Case Material": "Stainless Steel",
+      "Band Material": "Steel",
+      "Movement": "Automatic",
+      "Water Resistance": "50 m"
+    }
+  },
+  {
+    "id": "ingersoll-classic",
+    "brand": "Ingersoll",
+    "model": "Classic",
+    "name": "Ingersoll Classic",
+    "sku": "I12345",
+    "price": 25000,
+    "currency": "INR",
+    "availability": "Limited Stock",
+    "images": [
+      "assets/img/featured2.png",
+      "assets/img/product4.png",
+      "assets/img/new3.png"
+    ],
+    "description": "Vintage-inspired design with reliable automatic movement.",
+    "features": [
+      "Automatic movement",
+      "Open-heart dial",
+      "Genuine leather strap",
+      "Exhibition caseback"
+    ],
+    "specs": {
+      "Case Diameter": "44 mm",
+      "Case Material": "Stainless Steel",
+      "Band Material": "Leather",
+      "Movement": "Automatic",
+      "Water Resistance": "50 m"
+    }
+  },
+  {
+    "id": "rose-gold-luxe",
+    "brand": "Dreyfuss",
+    "model": "Rose Gold Luxe",
+    "name": "Dreyfuss Rose Gold",
+    "sku": "DR9001",
+    "price": 89000,
+    "currency": "INR",
+    "availability": "Preorder",
+    "images": [
+      "assets/img/featured3.png",
+      "assets/img/product5.png",
+      "assets/img/new4.png"
+    ],
+    "description": "Premium rose gold tone with refined indices and slim profile.",
+    "features": [
+      "Swiss movement",
+      "Sapphire crystal",
+      "Rose gold PVD",
+      "Butterfly clasp"
+    ],
+    "specs": {
+      "Case Diameter": "38 mm",
+      "Case Material": "Stainless Steel (PVD)",
+      "Band Material": "Steel",
+      "Movement": "Quartz",
+      "Water Resistance": "30 m"
+    }
+  }
+]
+

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Home | WatchStore</title>
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+  <%- include('partials/header') %>
+  <section class="hero">
+    
+  </section>
+
+  
+
+  <!-- Featured Section -->
+ <section class="featured-section">
+  <div class="container">
+    <h3 class="section-title">New Watches</h3>
+
+    <% if (products.length === 0) { %>
+      <p class="no-products">No featured watches found.</p>
+    <% } else { %>
+      <div class="product-grid">
+        <% products.forEach(product => { %>
+          <div class="product-card">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+            <div class="card-body">
+              <h5 class="product-name"><%= product.name %></h5>
+              <p class="product-desc"><%= product.description %></p>
+              <p class="product-price">₹<%= product.price %></p>
+              <div class="card-buttons">
+                <a href="/products/<%= product._id %>" class="btn-view">View</a>
+                <a href="/cart/add/<%= product._id %>" class="btn-dark">Add to Cart</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+  </div>
+</section>
+ <section class="hero relative h-[80vh] bg-cover bg-center flex items-center justify-center text-center"
+           style="background-image: url('/images/eee.jpg');">
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative z-10 text-white space-y-4">
+      <h1 class="text-5xl font-bold tracking-wide">Discover Timeless Elegance</h1>
+      <p class="text-lg">Luxury watches crafted for precision and prestige.</p><br>
+      <a href="/products" class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-3 rounded-lg shadow-md transition">
+        Shop Now
+      </a>
+    </div>
+  </section>
+
+
+<!-- 📰 Latest From Our Blog Section -->
+<section class="bg-white py-20 border-t border-gray-200">
+  <div class="max-w-7xl mx-auto px-6">
+    <!-- Heading -->
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold text-gray-900 tracking-tight">From Our Blog</h2>
+      <p class="text-gray-600 mt-3">Stories, reviews, and insights from the world of luxury watches</p>
+      <div class="mt-3 w-24 h-[3px] bg-yellow-400 mx-auto rounded-full"></div>
+    </div>
+
+    <!-- Blog Cards Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <!-- Blog 1 -->
+      <article class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
+        <div class="overflow-hidden">
+          <img src="/images/blog1.jpg" alt="Watch Maintenance" 
+               class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-gray-500 mb-2">November 3, 2025</p>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900 group-hover:text-yellow-500 transition">
+            How to Care for Your Luxury Watch
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">
+            Learn essential tips on cleaning, servicing, and storing your timepiece to maintain its brilliance and performance.
+          </p>
+          <a href="/blogs" class="inline-block text-yellow-500 font-semibold hover:text-yellow-600 transition">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <!-- Blog 2 -->
+      <article class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
+        <div class="overflow-hidden">
+          <img src="/images/blog2.jpg" alt="Best Watches 2025" 
+               class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-gray-500 mb-2">October 29, 2025</p>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900 group-hover:text-yellow-500 transition">
+            Top 5 Watches to Invest In for 2025
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">
+            Discover the best-selling and most reliable watch models that combine design, heritage, and long-term value.
+          </p>
+          <a href="/blogs" class="inline-block text-yellow-500 font-semibold hover:text-yellow-600 transition">
+            Read More →
+          </a>
+        </div>
+      </article>
+
+      <!-- Blog 3 -->
+      <article class="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition">
+        <div class="overflow-hidden">
+          <img src="/images/blog3.jpg" alt="Chronograph Watches" 
+               class="w-full h-56 object-cover group-hover:scale-105 transition duration-500">
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-gray-500 mb-2">October 15, 2025</p>
+          <h3 class="text-xl font-semibold mb-3 text-gray-900 group-hover:text-yellow-500 transition">
+            The Evolution of Chronograph Watches
+          </h3>
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">
+            From aviation to racing, explore how chronographs have defined precision timekeeping and masculine style.
+          </p>
+          <a href="/blogs" class="inline-block text-yellow-500 font-semibold hover:text-yellow-600 transition">
+            Read More →
+          </a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+    <%- include('partials/footer') %>
+<!-- Font Awesome (for social icons) -->
+<script src="https://kit.fontawesome.com/a2d04d4e2c.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

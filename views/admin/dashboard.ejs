@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard | WatchStore</title>
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <h1>Admin Dashboard</h1>
+    <div class="stats">
+      <div class="card">Total Products: <%= totalProducts %></div>
+      <div class="card">Total Users: <%= totalUsers %></div>
+    </div>
+
+    <div class="links">
+      <a href="/admin/products">Manage Products</a>
+      <a href="/admin/users">Manage Users</a>
+      <a href="/auth/logout" class="logout">Logout</a>
+    </div>
+  </div>
+</body>
+</html>

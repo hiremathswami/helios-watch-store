@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add New Product | Helios Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f4f6;
+    }
+    .image-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .image-preview img {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+  </style>
+</head>
+
+<body class="flex bg-gray-100 min-h-screen text-gray-800">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-[#0f172a] text-white flex flex-col justify-between shadow-xl">
+    <div>
+      <h1 class="text-2xl font-bold text-white mb-8 text-center pt-6">HELIOS Admin</h1>
+      <nav class="px-4 space-y-2">
+        <a href="/admin" class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">Dashboard</a>
+        <a href="/admin/manage-products" class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">Products</a>
+        <a href="/admin/add-product" class="block py-2 px-3 bg-blue-600 rounded-lg font-semibold">Add Product</a>
+        <a href="/admin/users" class="block py-2 px-3 rounded-lg hover:bg-blue-600 transition">Users</a>
+      </nav>
+    </div>
+    <div class="p-4 text-center border-t border-blue-800/30">
+      <a href="/" class="text-sm text-blue-400 hover:text-blue-300 transition">← Back to Store</a>
+    </div>
+  </aside>
+
+  <!-- Main Form Section -->
+  <main class="flex-1 flex justify-center items-center p-10">
+    <div class="bg-white shadow-xl rounded-xl w-full max-w-lg p-8 border border-gray-200">
+      <h1 class="text-2xl font-bold text-center mb-6 text-blue-600">Add New Product</h1>
+
+      <form action="/admin/add-product" method="POST" enctype="multipart/form-data" class="space-y-5">
+
+        <!-- Product Name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Product Name</label>
+          <input type="text" name="name" required placeholder="Enter product name"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+
+        <!-- Brand -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Brand</label>
+          <input type="text" name="brand" placeholder="Enter brand name"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+
+        <!-- Gender -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Gender</label>
+          <select name="gender"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Unisex">Unisex</option>
+          </select>
+        </div>
+
+        <!-- Movement -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Movement</label>
+          <input type="text" name="movement" placeholder="e.g., Quartz, Automatic"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+
+        <!-- Description -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Description</label>
+          <textarea name="description" rows="3" placeholder="Enter product description"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+        </div>
+
+        <!-- Price -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Price (₹)</label>
+          <input type="number" name="price" required placeholder="Enter price"
+            class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+
+        <!-- Upload Multiple Images -->
+        <div>
+          <label class="block text-sm font-medium text-gray-600 mb-1">Upload Images</label>
+          <input type="file" name="images" id="imageInput" multiple accept="image/*"
+            class="w-full text-gray-700 file:mr-3 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-600 file:text-white hover:file:bg-blue-700 cursor-pointer" />
+          <div id="imagePreview" class="image-preview"></div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit"
+          class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-all duration-300 shadow-md">
+          Add Product
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <!-- Image Preview Script -->
+  <script>
+    const imageInput = document.getElementById('imageInput');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageInput.addEventListener('change', () => {
+      imagePreview.innerHTML = '';
+      const files = Array.from(imageInput.files);
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          imagePreview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+</body>
+</html>

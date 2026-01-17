@@ -1,0 +1,144 @@
+/* === HELIOS NAVBAR THEME (Blue + Gold Luxury Edition) === */
+
+/* --- Global Header Wrapper --- */
+header {
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* --- When Scrolled --- */
+header.shadow-lg {
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Logo --- */
+.logo-text {
+  font-family: 'Poppins', sans-serif;
+  color: #1e3a8a; /* Deep Royal Blue */
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+}
+.logo-text:hover {
+  color: #2563eb; /* Bright Blue Hover */
+  transform: scale(1.05);
+}
+
+/* --- Navbar Links --- */
+.nav-link {
+  position: relative;
+  color: #374151; /* Neutral Gray */
+  text-transform: capitalize;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding-bottom: 2px;
+}
+.nav-link:hover {
+  color: #1e40af; /* Deep Blue Hover */
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(to right, #2563eb, #facc15);
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* --- Active Link (Optional) --- */
+.nav-link.active {
+  color: #1e40af;
+  font-weight: 600;
+}
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* --- Search Input (Visible Only for Logged-in Users) --- */
+.search-input {
+  border: 1px solid #e5e7eb;
+  background-color: #f9fafb;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  padding: 0.6rem 2.2rem 0.6rem 1rem;
+  color: #374151;
+}
+.search-input:focus {
+  border-color: #facc15; /* Gold Highlight */
+  box-shadow: 0 0 6px rgba(250, 204, 21, 0.5);
+  background-color: #ffffff;
+}
+.search-input::placeholder {
+  color: #9ca3af;
+  font-style: italic;
+}
+
+/* --- Icons (Cart & Profile) --- */
+.icon-btn {
+  font-size: 1.4rem;
+  color: #4b5563; /* Gray 600 */
+  transition: all 0.2s ease-in-out;
+}
+.icon-btn:hover {
+  color: #facc15; /* Gold Hover */
+  transform: scale(1.1);
+}
+
+/* --- Login & Register Buttons (Visible Before Login) --- */
+a[href="/login"], a[href="/register"] {
+  font-weight: 500;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+a[href="/login"]:hover,
+a[href="/register"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Mobile Menu Links --- */
+.mobile-link {
+  padding: 12px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #374151;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+.mobile-link:hover {
+  background: #f3f4f6;
+  color: #1e40af;
+  padding-left: 32px;
+}
+
+/* --- Divider (Gold Line) --- */
+header .bg-gradient-to-r {
+  height: 3px;
+  opacity: 0.85;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 0.95rem;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .icon-btn {
+    font-size: 1.2rem;
+  }
+
+  .logo-text {
+    font-size: 1.8rem;
+  }
+}

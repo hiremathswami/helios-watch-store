@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>Admin Dashboard</h1>
+  <a href="/admin/products/new">➕ Add New Product</a>
+  <div>
+    <% products.forEach(p => { %>
+      <div class="product">
+        <img src="<%= p.image %>" alt="<%= p.name %>" width="100">
+        <h3><%= p.name %></h3>
+        <p>₹<%= p.price %></p>
+        <a href="/admin/products/<%= p._id %>/edit">✏️ Edit</a>
+        <form action="/admin/products/<%= p._id %>/delete" method="POST" style="display:inline;">
+          <button type="submit">🗑️ Delete</button>
+        </form>
+      </div>
+    <% }) %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help & Contact | Helios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/header.css">
+</head>
+
+<body class="bg-gray-50 font-sans text-gray-800">
+
+  <!-- Header -->
+  <%- include('partials/header') %>
+
+  <!-- Main Section -->
+  <section class="pt-32 pb-20">
+    <div class="max-w-5xl mx-auto text-center px-6">
+      <h1 class="text-4xl font-bold text-blue-900 mb-4">Help & Contact</h1>
+      <p class="text-gray-600 text-lg mb-12">
+        Got a question or want to know more? Get in touch with us for more information.
+      </p>
+
+      <!-- Contact Options -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Chat With Us -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg border border-gray-200 p-8 transition-all duration-300">
+          <div class="flex justify-center mb-4">
+            <div class="bg-blue-50 rounded-full p-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.374 9.374 0 01-3.56-.69L3 20l1.58-3.16A7.955 7.955 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Chat With Us</h3>
+          <a href="#" class="text-blue-600 hover:underline text-sm font-medium">Start Chat</a>
+        </div>
+
+        <!-- Call Us -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg border border-gray-200 p-8 transition-all duration-300">
+          <div class="flex justify-center mb-4">
+            <div class="bg-blue-50 rounded-full p-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M3 5a2 2 0 012-2h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V8a2 2 0 01-2 2h-.586l-.707.707a16.001 16.001 0 006.586 6.586L15 16.586V16a2 2 0 012-2h1.586a1 1 0 01.707.293l2.414 2.414A1 1 0 0122 18.586V21a2 2 0 01-2 2h-1C9.163 23 3 16.837 3 9V6a1 1 0 011-1h2z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Call Us At</h3>
+          <a href="tel:1800-266-0123" class="text-blue-600 hover:underline text-sm font-medium">1800-266-0123</a>
+        </div>
+
+        <!-- Write To Us -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-lg border border-gray-200 p-8 transition-all duration-300">
+          <div class="flex justify-center mb-4">
+            <div class="bg-blue-50 rounded-full p-4">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 8V8a2 2 0 00-2-2H7a2 2 0 00-2 2v8a2 2 0 002 2h10a2 2 0 002-2z" />
+              </svg>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold mb-2">Write To Us</h3>
+          <a href="mailto:support@helioswatches.com" class="text-blue-600 hover:underline text-sm font-medium">
+            support@helioswatches.com
+          </a>
+        </div>
+      </div>
+
+      <!-- Note -->
+      <p class="text-xs text-gray-500 mt-10 max-w-3xl mx-auto leading-relaxed">
+        *The toll-free number is applicable for domestic orders within India. For international inquiries or delivery-related questions,
+        please reach out via WhatsApp, live chat, or email.
+      </p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>

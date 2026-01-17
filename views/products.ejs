@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All Watches | Helios</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/css/product.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <%- include('partials/header') %>
+  
+
+   <section class="relative w-full h-[60vh] overflow-hidden mt-20">
+
+    <img src="/images/hero-watches.jpg" alt="Luxury Watches Banner"
+         class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-6">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3 tracking-wide">
+        SELECT FROM A CURATION
+      </h1>
+      <p class="text-lg md:text-xl text-gray-200 font-light">
+        Of 45+ International Brands
+      </p>
+    </div>
+  </section>
+
+  <!-- Page Title -->
+  <section class="text-center mt-10">
+    <h1 class="text-4xl font-bold text-black mb-3">All Watches</h1>
+    <p class="text-gray-600 text-sm">Explore our complete collection of premium watches</p>
+  </section>
+
+  <div class="watches-page">
+  <aside class="filters">
+  <form method="GET" action="/products">
+    <h3>Filters</h3>
+
+    <!-- BRANDS -->
+    <details open>
+      <summary>Brands</summary>
+      <div class="filter-group">
+        <label>
+          <input type="radio" name="brand" value="All" <%= !selected.brand || selected.brand === 'All' ? 'checked' : '' %>>
+          All Brands
+        </label>
+        <% brands.forEach(b => { %>
+          <label>
+            <input type="radio" name="brand" value="<%= b %>" <%= selected.brand === b ? 'checked' : '' %>> <%= b %>
+          </label>
+        <% }) %>
+      </div>
+    </details>
+
+    <!-- MOVEMENT -->
+    <details open>
+      <summary>Movement</summary>
+      <div class="filter-group">
+        <label>
+          <input type="radio" name="movement" value="All" <%= !selected.movement || selected.movement === 'All' ? 'checked' : '' %>>
+          All Movements
+        </label>
+        <% movements.forEach(m => { %>
+          <label>
+            <input type="radio" name="movement" value="<%= m %>" <%= selected.movement === m ? 'checked' : '' %>> <%= m %>
+          </label>
+        <% }) %>
+      </div>
+    </details>
+
+    <!-- GENDER -->
+    <details open>
+      <summary>Gender</summary>
+      <div class="filter-group">
+        <label>
+          <input type="radio" name="gender" value="All" <%= !selected.gender || selected.gender === 'All' ? 'checked' : '' %>>
+          All
+        </label>
+        <% genders.forEach(g => { %>
+          <label>
+            <input type="radio" name="gender" value="<%= g %>" <%= selected.gender === g ? 'checked' : '' %>> <%= g %>
+          </label>
+        <% }) %>
+      </div>
+    </details>
+
+    <!-- PRICE -->
+    <details open>
+      <summary>Price</summary>
+      <div class="filter-group">
+        <label><input type="radio" name="price" value="1000-20000" <%= selected.price === '1000-20000' ? 'checked' : '' %>> ₹1000-₹20000</label>
+        <label><input type="radio" name="price" value="20000-40000" <%= selected.price === '20000-40000' ? 'checked' : '' %>> ₹20,000–₹40,000</label>
+        <label><input type="radio" name="price" value="40000-60000" <%= selected.price === '40000-60000' ? 'checked' : '' %>> ₹40,000–₹60,000</label>
+        <label><input type="radio" name="price" value="60000-80000" <%= selected.price === '60000-80000' ? 'checked' : '' %>> ₹60,000–₹80,000</label>
+        <label><input type="radio" name="price" value="80000-100000" <%= selected.price === '80000-100000' ? 'checked' : '' %>> ₹80,000–₹100,000</label>
+        <label><input type="radio" name="price" value="above-100000" <%= selected.price === 'above-100000' ? 'checked' : '' %>> ₹100,000 & Above</label>
+      </div>
+    </details>
+<script>
+function clearFilters() {
+  document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(el => el.checked = false);
+  window.location.href = '/products';
+}
+</script>
+
+<button onclick="clearFilters()" 
+  class="mt-4 bg-gray-100 hover:bg-gray-200 text-sm font-semibold text-gray-700 px-4 py-2 rounded-lg">
+  Clear Filters
+</button>
+
+    <button type="submit" class="apply-btn">Apply Filters</button>
+  </form>
+</aside>
+
+
+  <!-- PRODUCT GRID -->
+  <section class="product-section">
+    <div class="top-bar">
+      <h2>All Watches</h2>
+      <select name="sort" onchange="window.location.href='/products?sort='+this.value" class="sort-select">
+        <option value="">Sort By</option>
+        <option value="price-asc" <%= selected.sort === 'price-asc' ? 'selected' : '' %>>Price: Low to High</option>
+        <option value="price-desc" <%= selected.sort === 'price-desc' ? 'selected' : '' %>>Price: High to Low</option>
+      </select>
+    </div>
+
+    <div class="product-grid">
+  <% products.forEach(product => { %>
+    <div class="product-card">
+      <img src="<%= product.image %>" alt="<%= product.name %>">
+      <div class="info">
+        <h4 class="product-name"><%= product.name %></h4>
+        <p class="product-meta">
+          <%= product.brand ? product.brand : 'Unknown Brand' %> |
+          <%= product.gender ? product.gender : 'Unisex' %> |
+          <%= product.movement ? product.movement : 'Quartz' %>
+        </p>
+        <p class="price">₹<%= product.price.toLocaleString() %></p>
+        <div class="btn-group">
+          <a href="/products/<%= product._id %>" class="view-btn">View</a>
+          <a href="/cart/add/<%= product._id %>" class="cart-btn">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+  <% }) %>
+</div>
+
+  </section>
+</div>
+<script>
+  document.querySelectorAll('.filters input[type="radio"]').forEach(el => {
+    el.addEventListener('change', () => el.form.submit());
+  });
+</script>
+
+
+  <!-- Footer -->
+  <%- include('partials/footer') %>
+
+</body>
+</html>
