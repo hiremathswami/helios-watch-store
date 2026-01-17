@@ -17,13 +17,13 @@ const accountRoutes = require('./routes/accountRoutes');
 const blogRoutes = require('./routes/blogRoutes');
 
 
-
 // Models
 const Product = require('./models/product');
 const User = require('./models/user');
 
 // Middleware
 const isAdmin = require('./middlewares/isAdmin');
+
 // -------------------- AUTH MIDDLEWARE --------------------
 function isAuthenticated(req, res, next) {
   if (req.session && req.session.user) {
@@ -43,14 +43,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// ✅ SESSION MUST BE BEFORE ROUTES
+// SESSION MUST BE BEFORE ROUTES
 app.use(session({
   secret: "yourSecretKey",
   resave: false,
   saveUninitialized: true,
 }));
 
-// ✅ Initialize empty cart if not exist
+// Initialize empty cart if not exist
 app.use((req, res, next) => {
   if (!req.session.cart) {
     req.session.cart = [];
@@ -67,8 +67,8 @@ app.use((req, res, next) => {
 
 // -------------------- MongoDB Connection --------------------
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('✅ MongoDB connected'))
-  .catch(err => console.error('❌ MongoDB connection error:', err));
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.error('MongoDB connection error:', err));
 
 // -------------------- Multer Setup --------------------
 const storage = multer.diskStorage({
@@ -83,19 +83,18 @@ app.set('views', path.join(__dirname, 'views'));
 
 // -------------------- Routes --------------------
 
-// 🏠 Home Page - Show Only 5 Featured Watches
-
+// Home Page - Show Only Featured Watches
 app.get('/', async (req, res) => {
   try {
     const products = await Product.find().limit(8);
     res.render('index', { products });
   } catch (err) {
-    console.error('❌ Error loading products:', err);
+    console.error('Error loading products:', err);
     res.status(500).send('Error loading featured watches');
   }
 });
 
-// 🧑‍💻 Authentication Routes
+// Authentication Routes
 app.get('/login', (req, res) => res.render('login'));
 app.get('/register', (req, res) => res.render('register'));
 
@@ -107,7 +106,6 @@ app.post('/login', async (req, res) => {
     if (!user) return res.send('User not found');
     if (user.password !== password) return res.send('Incorrect password');
 
-    // Save full user info in session
     req.session.user = {
       id: user._id,
       name: user.name,
@@ -115,7 +113,6 @@ app.post('/login', async (req, res) => {
       role: user.role || 'user',
     };
 
-    // Redirect by role
     if (user.role === 'admin') {
       req.session.isAdmin = true;
       res.redirect('/admin');
@@ -124,7 +121,7 @@ app.post('/login', async (req, res) => {
       res.redirect('/account');
     }
   } catch (err) {
-    console.error('❌ Login error:', err);
+    console.error('Login error:', err);
     res.status(500).send('Server error');
   }
 });
@@ -138,7 +135,7 @@ app.post('/register', async (req, res) => {
 
     const newUser = new User({ name, email, password, role: 'user' });
     await newUser.save();
-    console.log('✅ Registration successful:', newUser.email);
+    console.log('Registration successful:', newUser.email);
     res.redirect('/login');
   } catch (err) {
     console.error('Registration error:', err);
@@ -151,11 +148,11 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-// 👑 Admin Dashboard
+// Admin Dashboard
 app.get('/admin', isAdmin, (req, res) => res.render('admin_dashboard'));
 app.get('/add-product', isAdmin, (req, res) => res.render('add-product'));
 
-// 🛒 CART HANDLING
+// Cart Handling
 app.get('/cart', (req, res) => {
   const cart = req.session.cart || [];
   const cartTotal = cart.reduce((sum, item) => sum + item.price, 0);
@@ -174,7 +171,7 @@ app.get('/cart/add/:id', async (req, res) => {
       image: product.image,
     });
 
-    console.log('🛒 Added to cart:', product.name);
+    console.log('Added to cart:', product.name);
     res.redirect('/cart');
   } catch (err) {
     console.error('Error adding to cart:', err);
@@ -204,15 +201,13 @@ app.use('/payment', paymentRoutes);
 app.use('/', accountRoutes);
 app.use('/', blogRoutes);
 
-
 // -------------------- Start Server --------------------
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 module.exports = (req, res, next) => {
   if (req.session && req.session.isAdmin) {
     next();
   } else {
-    res.redirect('/login'); // redirect to login if not admin
+    res.redirect('/login');
   }
 };
-

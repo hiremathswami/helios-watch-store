@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
 
-// 🛒 View Cart
+// View Cart
 router.get('/', (req, res) => {
   if (!req.session.cart) req.session.cart = [];
 
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
   res.render('cart', { cart: req.session.cart, cartTotal: total });
 });
 
-// ➕ Add to Cart
+//  Add to Cart
 router.post('/add-to-cart/:id', async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -35,7 +35,7 @@ router.post('/add-to-cart/:id', async (req, res) => {
   }
 });
 
-// ❌ Remove from Cart
+//  Remove from Cart
 router.get('/remove/:id', (req, res) => {
   if (!req.session.cart) return res.redirect('/cart');
   req.session.cart = req.session.cart.filter(item => item.id != req.params.id);

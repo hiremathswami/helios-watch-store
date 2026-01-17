@@ -21,7 +21,7 @@ router.get('/', isAdmin, async (req, res) => {
     const recentProducts = await Product.find().sort({ createdAt: -1 }).limit(5);
     res.render('admin/dashboard', { totalProducts, totalUsers, recentProducts });
   } catch (err) {
-    console.error('❌ Dashboard Error:', err);
+    console.error('Dashboard Error:', err);
     res.status(500).send('Server Error');
   }
 });
@@ -35,7 +35,7 @@ router.get('/manage-products', isAdmin, async (req, res) => {
     const products = await Product.find().sort({ createdAt: -1 });
     res.render('admin/manage-products', { products });
   } catch (err) {
-    console.error('❌ Product Fetch Error:', err);
+    console.error(' Product Fetch Error:', err);
     res.status(500).send('Error loading products');
   }
 });
@@ -87,7 +87,7 @@ router.get('/products/edit/:id', isAdmin, async (req, res) => {
     if (!product) return res.status(404).send('Product not found');
     res.render('admin/edit-product', { product });
   } catch (err) {
-    console.error('❌ Edit Fetch Error:', err);
+    console.error('Edit Fetch Error:', err);
     res.status(500).send('Server error');
   }
 });
@@ -101,10 +101,10 @@ router.post('/edit-product/:id', isAdmin, upload.single('image'), async (req, re
     if (req.file) updateData.image = '/images/' + req.file.filename;
 
     await Product.findByIdAndUpdate(req.params.id, updateData);
-    console.log('✅ Product updated successfully');
+    console.log('Product updated successfully');
     res.redirect('/admin/manage-products');
   } catch (err) {
-    console.error('❌ Product Update Error:', err);
+    console.error(' Product Update Error:', err);
     res.status(500).send('Error updating product');
   }
 });
@@ -113,10 +113,10 @@ router.post('/edit-product/:id', isAdmin, upload.single('image'), async (req, re
 router.get('/delete-product/:id', isAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
-    console.log('🗑️ Product deleted successfully!');
+    console.log('Product deleted successfully!');
     res.redirect('/admin/manage-products');
   } catch (err) {
-    console.error('❌ Product Delete Error:', err);
+    console.error(' Product Delete Error:', err);
     res.status(500).send('Error deleting product');
   }
 });
@@ -127,7 +127,7 @@ router.get('/users', isAdmin, async (req, res) => {
     const users = await User.find().sort({ createdAt: -1 });
     res.render('admin/users', { users });
   } catch (err) {
-    console.error('❌ Users Fetch Error:', err);
+    console.error('Users Fetch Error:', err);
     res.status(500).send('Error loading users');
   }
 });

@@ -8,11 +8,11 @@ mongoose.connect('mongodb://127.0.0.1:27017/watchstore')
     const Rohan7385 = await bcrypt.hash('admin123', 10);
     await User.create({
       name: 'Admin',
-      email: 'rohanhiremathswami73@gmail.com.com',
-      password: Rohan7385,
+      email: '.admin@gmail.com',
+      password: admin7385,
       isAdmin: true
     });
-    console.log('✅ Admin user created!');
+    console.log('Admin user created!');
     mongoose.connection.close();
   })
   .catch(err => console.log(err));
