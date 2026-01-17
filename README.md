@@ -10,6 +10,25 @@ This project demonstrates practical backend development using Node.js, Express, 
 
 ## Features
 
+## 📸 Website Screenshots
+
+### Home Page
+![Home Page](screenshots/home.png)
+
+### Login & Register
+![Login Page](screenshots/login.png)
+
+### Product Listing
+![Products](screenshots/product.png)
+
+### Product Details
+![Product Details](screenshots/product-details.png)
+
+### Cart & Checkout
+![Cart](screenshots/cart.png)
+![Checkout](screenshots/checkout.png)
+
+
 ### User
 - User registration and login
 - Session-based authentication
